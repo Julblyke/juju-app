@@ -36,7 +36,7 @@ body, #root, .main-container {
     pointer-events: none;
     z-index: 3;
     /* overflow: hidden; */    /* <-- Remove this line */
-    overflow-y: auto;          /* <-- Add this line for scroll, or remove for bubble to grow */
+    overflow: hidden;          /* <-- Add this line for scroll, or remove for bubble to grow */
 }
 
 
