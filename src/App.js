@@ -143,9 +143,12 @@ function App() {
             <span className="thinking-text">{thinkingTranslations[thinkingIndex]}</span>
           </span>
         ) : (
-          (typeof typewriterText === "string" ? typewriterText : "")
+          (typeof typewriterText === "string"
+  ? typewriterText.split('\n\n').map((para, idx) => <p key={idx}>{para}</p>)
+  : "")
+
         )}
-      </pre>
+    
     </div>
     <div className={`input-wrapper${inputError ? " input-error" : ""}`}>
       <input
