@@ -1,38 +1,196 @@
-.App {
-  text-align: center;
-}
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
+body, #root, .main-container {
+  background-image: url('./juju.png');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
   min-height: 100vh;
+  min-width: 100vw;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Remove duplicate background from .main-container */
+.main-container {
+  height: 100vh;
+  width: 100vw;
+  position: relative;
+  overflow: hidden;
   display: flex;
   flex-direction: column;
+  justify-content: flex-end;
+}
+
+/* Speech bubble wrapper to position content inside the bubble in the image */
+.bubble-content-wrapper {
+  position: absolute;
+  top: 8%;
+  left: 33%;
+  width: 32vw;
+  height: 33vh;
+  padding: 2vw 3vw 2vw 3vw;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  pointer-events: none;
+  z-index: 3;
+  overflow: hidden;        /* Make sure content can't spill out */
+}
+
+.result-content {
+  font-family: "Roboto", sans-serif;
+  color: #222;
+  background: transparent;
+  border: none;
+  font-size: 1.0vw;
+  line-height: 1.45;
+  white-space: pre-wrap;
+  word-break: break-word;
+  max-width: 100%;
+  max-height: 100%;
+  margin: 0;
+  padding: 0;
+  text-align: left;
+  overflow-wrap: break-word; /* Helps wrap long words */
+  overflow: auto;            /* Allow scrolling if text is too big */
+  box-shadow: none;
+}
+
+
+/* Input bar at bottom right */
+.input-wrapper {
+  position: absolute;
+  /* Move up: adjust bottom (increase), move left: decrease right or add left */
+  bottom: 20vh;      /* Move higher up (was 3vh, try 20vh) */
+  left: 35vw;        /* Line up under the speech bubble - adjust this value! */
+  right: auto;
+  width: 380px;
+  max-width: 36vw;
+  z-index: 10;
+  padding: 0.3rem 1rem;
+  background: #002B49;
+  border-radius: 0.75rem;
+  display: flex;
+  align-items: center;
+  box-shadow: 0 1px 4px rgba(30,30,30,0.09);
+}
+
+
+.ask-input {
+  background: transparent;
+  border: none;
+  outline: none;
+  color: #fff;
+  font-size: 1rem;
+  flex-grow: 1;
+  padding-right: 0.5rem;
+}
+
+.ask-input::placeholder {
+  color: #767670;
+}
+
+.ask-button {
+  background-color: #669933;
+  border: none;
+  color: #ffffff;
+  padding: 0.35rem 0.75rem;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  font-size: 1rem;
+  margin-left: 0.3rem;
+}
+
+.ask-button:hover {
+  background-color: #008651;
+}
+
+.input-wrapper.input-error {
+  border: 2px solid #ff4d4f;
+  animation: shake 0.3s;
+}
+
+/* Loading/thinking spinner styling etc */
+.thinking-wrapper {
+  display: flex;
   align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  width: 100%;
+  min-height: 2rem;
+}
+.spinner {
+  width: 1.1em;
+  height: 1.1em;
+  border: 2px solid rgba(96,96,91,0.25);
+  border-top: 2px solid #008651;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin-right: 0.6em;
+  opacity: 0.7;
+}
+.thinking-text {
+  color: #222;
+  opacity: 0.85;
+  font-size: 1.1vw;
+  z-index: 1;
+  margin-left: 0.5rem;
+  margin-right: 0.5rem;
+}
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+@keyframes shake {
+  0% { transform: translateX(0); }
+  20% { transform: translateX(-5px); }
+  40% { transform: translateX(5px); }
+  60% { transform: translateX(-5px); }
+  80% { transform: translateX(5px); }
+  100% { transform: translateX(0); }
 }
 
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
+/* Responsive: Tablet */
+@media (min-width: 601px) and (max-width: 1100px) {
+  .bubble-content-wrapper {
+    top: 10%;
+    left: 21%;
+    width: 57vw;
+    height: 33vh;
+    font-size: 1.7vw;
+    padding: 2vw 3vw 2vw 3vw;
   }
-  to {
-    transform: rotate(360deg);
+  .input-wrapper {
+    width: 320px;
+    max-width: 50vw;
+    font-size: 0.95rem;
+    bottom: 2vh;
+    right: 2vw;
+  }
+  .result-content {
+    font-size: 1.6vw;
+  }
+}
+
+/* Responsive: Mobile */
+@media (max-width: 600px) {
+  .bubble-content-wrapper {
+    top: 14%;
+    left: 10%;
+    width: 80vw;
+    height: 29vw;
+    font-size: 2.8vw;
+    padding: 4vw 3vw 2vw 3vw;
+  }
+  .input-wrapper {
+    width: 92vw;
+    max-width: 95vw;
+    font-size: 1.1rem;
+    left: 1vw;
+    right: 1vw;
+    bottom: 1.5vh;
+    padding: 0.3rem 0.7rem;
+  }
+  .result-content {
+    font-size: 3vw;
   }
 }
