@@ -23,19 +23,22 @@ body, #root, .main-container {
 
 /* Speech bubble wrapper to position content inside the bubble in the image */
 .bubble-content-wrapper {
-  position: absolute;
-  top: 8%;
-  left: 33%;
-  width: 32vw;
-  height: 33vh;
-  padding: 2vw 3vw 2vw 3vw;
-  display: flex;
-  align-items: flex-start;
-  justify-content: center;
-  pointer-events: none;
-  z-index: 3;
-  overflow: hidden;        /* Make sure content can't spill out */
+    position: absolute;
+    top: 8%;
+    left: 33%;
+    width: 32vw;
+    min-height: 10vh;    /* Add this, or remove height entirely */
+    /* height: 33vh; */   /* <-- Remove this line */
+    padding: 2vw 3vw 2vw 3vw;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    pointer-events: none;
+    z-index: 3;
+    /* overflow: hidden; */    /* <-- Remove this line */
+    overflow-y: auto;          /* <-- Add this line for scroll, or remove for bubble to grow */
 }
+
 
 .result-content {
   font-family: "Roboto", sans-serif;
