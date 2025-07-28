@@ -27,7 +27,7 @@ body, #root, .main-container {
     top: 8%;
     left: 33%;
     width: 32vw;
-    min-height: 10vh;    /* Add this, or remove height entirely */
+    min-height: 20vh;    /* Add this, or remove height entirely */
     /* height: 33vh; */   /* <-- Remove this line */
     padding: 2vw 3vw 2vw 3vw;
     display: flex;
